@@ -1,72 +1,57 @@
 import Link from "next/link";
 import { Skill } from "@/lib/mockSkills";
+import { formatStars } from "@/lib/formatStars";
 
 export default function SkillCard({ skill }: { skill: Skill }) {
   return (
     <div className="
-      group border border-zinc-200 
-      bg-white rounded-2xl p-5
+      group rounded-2xl border border-zinc-200
+      bg-white p-5
       hover:shadow-lg hover:border-indigo-200
-      hover:-translate-y-0.5
-      transition-all duration-200
+      transition-all
     ">
-      
-      {/* title */}
+
+      {/* title + stars */}
       <div className="flex justify-between items-start">
-        <h2 className="
-          font-medium text-zinc-900 
-          group-hover:text-indigo-600
-          transition
-        ">
+        <h2 className="font-semibold text-zinc-900 group-hover:text-indigo-600">
           {skill.name}
         </h2>
 
         <span className="text-xs text-zinc-500">
-          ★ {skill.stars}
+          ★ {formatStars(skill.stars)}
         </span>
       </div>
 
       {/* description */}
-      <p className="text-sm text-zinc-500 mt-2 leading-relaxed">
+      <p className="text-sm text-zinc-500 mt-2 line-clamp-2">
         {skill.description}
       </p>
 
       {/* tags */}
-      <div className="flex gap-2 mt-4 flex-wrap">
+      <div className="flex gap-2 mt-3 flex-wrap">
         {skill.tags.map((tag) => (
           <span
             key={tag}
-            className="
-              text-[11px] px-2 py-1 
-              bg-indigo-50 text-indigo-600
-              rounded-full
-            "
+            className="text-[11px] px-2 py-1 bg-zinc-100 text-zinc-600 rounded-full"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      {/* footer */}
-      <div className="mt-5 flex justify-between items-center">
-        
+      {/* actions */}
+      <div className="mt-4 flex justify-between items-center">
         <Link
           href={`/skill/${skill.id}`}
-          className="
-            text-sm font-medium text-indigo-600
-            hover:text-indigo-700 transition
-          "
+          className="text-sm text-indigo-600 hover:underline"
         >
-          View Detail →
+          View →
         </Link>
 
         <a
           href={skill.github_url}
           target="_blank"
-          className="
-            text-xs text-zinc-400 
-            hover:text-zinc-700 transition
-          "
+          className="text-xs text-zinc-400 hover:text-zinc-700"
         >
           GitHub
         </a>
